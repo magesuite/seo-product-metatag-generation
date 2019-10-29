@@ -22,7 +22,7 @@ class Color extends \MageSuite\DynamicDirectives\Model\Directive
             return null;
         }
 
-        return $product->getColor() ? ucfirst($product->getAttributeText('color')) : null;
+        return $product->getColor() ? $product->getAttributeText('color') : null;
     }
 
     protected function getProduct()
