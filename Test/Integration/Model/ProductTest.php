@@ -18,7 +18,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      */
     protected $productRepository;
 
-    public function setUp()
+    public function setUp(): void
     {
         $objectManager = \Magento\TestFramework\ObjectManager::getInstance();
         $this->registry = $objectManager->get(\Magento\Framework\Registry::class);
