@@ -21,14 +21,26 @@
                 <field id="meta_title" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Title</label>
                     <comment>
-                        <![CDATA[Please provide a pattern which will be used to generate Meta Title if this field in product is empty. You can use directives<br/>{{product_name}} - returns product name<br/>{{product_color}} - returns product color]]>
+                        <![CDATA[Please provide a pattern which will be used to generate Meta Title if this field in product is empty. You can use directives:<br/>
+                        {{product_name}} - returns product name<br/>
+                        {{product_color}} - returns product color<br/>
+                        {{product_brand}} - returns product attribute selected as brand]]>
                     </comment>
                 </field>
                 <field id="meta_description" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Meta Description</label>
                     <comment>
-                        <![CDATA[Please provide a pattern which will be used to generate Meta Description if this field in product is empty. You can use directives<br/>{{product_name}} - returns product name<br/>{{product_color}} - returns product color]]>
+                        <![CDATA[Please provide a pattern which will be used to generate Meta Description if this field in product is empty. You can use directives:<br/>
+                        {{product_name}} - returns product name<br/>
+                        {{product_color}} - returns product color<br/>
+                        {{product_brand}} - returns product attribute selected as brand<br/>
+                        {{product_short_description}} - returns product short description]]>
                     </comment>
+                </field>
+                <field id="brand" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Brand</label>
+                    <source_model>MageSuite\SeoProductMetatagGeneration\Model\Config\Attributes</source_model>
+                    <comment><![CDATA[Please define which attribute will be used for {{product_brand}} directive.]]></comment>
                 </field>
             </group>
         </section>
