@@ -27,12 +27,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoAppArea frontend
-     * @magentoDbIsolation enabled
-     * @magentoAppIsolation enabled
-     * @magentoDataFixture loadProducts
+     * @magentoDataFixture MageSuite_SeoProductMetatagGeneration::Test/Integration/_files/products.php
      * @magentoConfigFixture current_store seo/product_metatag_generation/is_enabled 1
-     * @magentoConfigFixture current_store seo/product_metatag_generation/meta_title Meta Title {{product_name}}
-     * @magentoConfigFixture current_store seo/product_metatag_generation/meta_description Meta Description {{product_name}}
+     * @magentoConfigFixture current_store seo/product_metatag_generation/meta_title Meta Title - {{product_name}} - {{product_brand}}
+     * @magentoConfigFixture current_store seo/product_metatag_generation/meta_description Meta Description - {{product_short_description}}
+     * @magentoConfigFixture current_store seo/product_metatag_generation/brand description
      * @dataProvider dataProvider
      * @param integer $productId
      * @param string $expectedMetaTitle
@@ -58,18 +57,8 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     public function dataProvider()
     {
         return [
-            ['product_without_metatags', 'Meta Title Product without meta tags', 'Meta Description Product without meta tags'],
+            ['product_without_metatags', 'Meta Title - Product without meta tags - Description', 'Meta Description - Short Description'],
             ['product_with_metatags', 'Meta title text', 'Meta description text']
         ];
-    }
-
-    public static function loadProducts()
-    {
-        require __DIR__.'/../_files/products.php';
-    }
-
-    public static function loadProductsRollback()
-    {
-        require __DIR__.'/../_files/products_rollback.php';
     }
 }

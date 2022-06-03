@@ -5,4 +5,3 @@
     'MageSuite_SeoProductMetatagGeneration',
     __DIR__
 );
-

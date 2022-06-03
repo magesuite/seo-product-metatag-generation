@@ -27,8 +27,6 @@ class Color extends \MageSuite\DynamicDirectives\Model\Directive
 
     protected function getProduct()
     {
-        $product = $this->registry->registry('product');
-
-        return ($product && $product->getId()) ? $product : null;
+        return $this->registry->registry('product');
     }
 }

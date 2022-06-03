@@ -2,7 +2,7 @@
 
 namespace MageSuite\SeoProductMetatagGeneration\Model\Directive\Directives\Product;
 
-class Name extends \MageSuite\DynamicDirectives\Model\Directive
+class ShortDescription extends \MageSuite\DynamicDirectives\Model\Directive
 {
     /**
      * @var \Magento\Framework\Registry
@@ -22,7 +22,7 @@ class Name extends \MageSuite\DynamicDirectives\Model\Directive
             return null;
         }
 
-        return $product->getName();
+        return $product->getShortDescription();
     }
 
     protected function getProduct()
