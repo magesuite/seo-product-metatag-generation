@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace MageSuite\SeoProductMetatagGeneration\Test\Integration\Model;
 
 /**
@@ -10,13 +8,19 @@ namespace MageSuite\SeoProductMetatagGeneration\Test\Integration\Model;
  */
 class ProductTest extends \PHPUnit\Framework\TestCase
 {
-    protected ?\Magento\Framework\Registry $registry;
-    protected ?\Magento\Catalog\Api\ProductRepositoryInterface $productRepository;
+    /**
+     * @var \Magento\Framework\Registry
+     */
+    protected $registry;
+
+    /**
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    protected $productRepository;
 
     public function setUp(): void
     {
         $objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-
         $this->registry = $objectManager->get(\Magento\Framework\Registry::class);
         $this->productRepository = $objectManager->create(\Magento\Catalog\Api\ProductRepositoryInterface::class);
     }
@@ -29,8 +33,12 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store seo/product_metatag_generation/meta_description Meta Description - {{product_short_description}}
      * @magentoConfigFixture current_store seo/product_metatag_generation/brand description
      * @dataProvider dataProvider
+     * @param integer $productId
+     * @param string $expectedMetaTitle
+     * @param string $expectedMetaDescription
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function testItReturnsCorrectAttributeValue(string $productId, string $expectedMetaTitle, string $expectedMetaDescription): void
+    public function testItReturnsCorrectAttributeValue($productId, $expectedMetaTitle, $expectedMetaDescription)
     {
         $product = $this->productRepository->get($productId);
 
@@ -43,7 +51,10 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedMetaDescription, $product->getMetaDescription());
     }
 
-    public static function dataProvider(): array
+    /**
+     * @return array
+     */
+    public function dataProvider()
     {
         return [
             ['product_without_metatags', 'Meta Title - Product without meta tags - Description', 'Meta Description - Short Description'],
