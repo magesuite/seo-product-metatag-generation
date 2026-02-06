@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\SeoProductMetatagGeneration\Test\Integration\Model;
 
 /**
@@ -8,15 +10,8 @@ namespace MageSuite\SeoProductMetatagGeneration\Test\Integration\Model;
  */
 class ProductTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\Framework\Registry
-     */
-    protected $registry;
-
-    /**
-     * @var \Magento\Catalog\Api\ProductRepositoryInterface
-     */
-    protected $productRepository;
+    protected ?\Magento\Framework\Registry $registry;
+    protected ?\Magento\Catalog\Api\ProductRepositoryInterface $productRepository;
 
     public function setUp(): void
     {
@@ -33,14 +28,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store seo/product_metatag_generation/meta_description Meta Description - {{product_short_description}}
      * @magentoConfigFixture current_store seo/product_metatag_generation/brand description
      * @dataProvider dataProvider
-     * @param integer $productId
-     * @param string $expectedMetaTitle
-     * @param string $expectedMetaDescription
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function testItReturnsCorrectAttributeValue($productId, $expectedMetaTitle, $expectedMetaDescription)
+    public function testItReturnsCorrectAttributeValue(string $productSku, string $expectedMetaTitle, string $expectedMetaDescription): void
     {
-        $product = $this->productRepository->get($productId);
+        $product = $this->productRepository->get($productSku);
 
         if ($this->registry->registry('product')) {
             $this->registry->unregister('product');
@@ -51,10 +43,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedMetaDescription, $product->getMetaDescription());
     }
 
-    /**
-     * @return array
-     */
-    public function dataProvider()
+    public static function dataProvider(): array
     {
         return [
             ['product_without_metatags', 'Meta Title - Product without meta tags - Description', 'Meta Description - Short Description'],
