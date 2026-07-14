@@ -26,10 +26,8 @@ class UpdateMetatags
         $this->keys = $keys;
     }
 
-    public function aroundGetData(\Magento\Catalog\Model\Product $subject, \Closure $proceed, $key = '', $index = null)
+    public function afterGetData(\Magento\Catalog\Model\Product $subject, $result, $key = '', $index = null)
     {
-        $result = $proceed($key, $index);
-
         if (!empty($result)) {
             return $result;
         }
