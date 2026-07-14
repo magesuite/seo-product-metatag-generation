@@ -27,9 +27,9 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store seo/product_metatag_generation/meta_title Meta Title - {{product_name}} - {{product_brand}}
      * @magentoConfigFixture current_store seo/product_metatag_generation/meta_description Meta Description - {{product_short_description}}
      * @magentoConfigFixture current_store seo/product_metatag_generation/brand description
-     * @dataProvider dataProvider
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dataProvider')]
     public function testItReturnsCorrectAttributeValue(string $productSku, string $expectedMetaTitle, string $expectedMetaDescription): void
     {
         $product = $this->productRepository->get($productSku);
